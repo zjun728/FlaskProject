@@ -1,0 +1,55 @@
+<!--引入layout.html模板，并重写 % block content 中内容 -->
+{% extends 'layout.html' %}
+<!--重写 block content中内容 -->
+<!--我的个人信息按钮展示界面 -->
+{% block content %}
+
+    <!--当未登录时，直接访问个人中心url则跳转到登录界面
+    {% if "user_name" not in session %}
+    <script>
+    window.location="{{ url_for("user_login") }}"
+    </script>
+    {% endif %}
+-->
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron" style="padding: 5px 5%">
+        <h2>{{ session.get("user_name") }}的个人中心</h2>
+    </div>
+    <div>
+
+        {% include "user_menu.html" %}
+
+        <div class="col-md-10">
+
+            {% for message in get_flashed_messages(with_categories=False, category_filter=("err")) %}
+                    <h3 style="color: red"> {{ message }}</h3>
+                {% endfor %}
+
+                {% for message in get_flashed_messages(with_categories=False, category_filter=("ok")) %}
+                    <h3 style="color: green"> {{ message }}</h3>
+                {% endfor %}
+            <div class="jumbotron" style="padding-top: 10px">
+                <h2>个人信息</h2>
+                <hr style="border: dashed"/>
+                <p>用户名：{{ user.name }}</p>
+                <p>邮箱：{{ user.email }}</p>
+                <p>年龄：{{ user.age }}</p>
+                <p>生日：{{ user.birthday }}</p>
+                <p>头像：{{ user.face }}</p>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block js_code %}
+    <script>
+        $(document).ready(
+            function () {
+                $("#item-1").addClass("list-group-item-success")
+            }
+        );
+    </script>
+{% endblock %}

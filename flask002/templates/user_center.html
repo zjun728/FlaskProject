@@ -1,0 +1,45 @@
+<!--引入layout.html模板，并重写 % block content 中内容 -->
+{% extends 'layout.html' %}
+<!--重写 block content中内容 -->
+<!--个人中心界面 -->
+{% block content %}
+
+    <!--当未登录时，直接访问个人中心url则跳转到登录界面
+    {% if "user_name" not in session %}
+    <script>
+    window.location="{{ url_for("user_login") }}"
+    </script>
+    {% endif %}
+-->
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron" style="padding: 5px 5%">
+        <h2>{{ session.get("user_name") }}的个人中心</h2>
+    </div>
+    <div>
+
+        {% include "user_menu.html" %}
+
+       <div class="col-md-10">
+
+            <div class="jumbotron">
+                <h1>个人中心</h1>
+                <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar
+                    work.It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block js_code %}
+    <script>
+        $(document).ready(
+            function () {
+                $("#nav-2").addClass("active")
+            }
+        );
+    </script>
+{% endblock %}
