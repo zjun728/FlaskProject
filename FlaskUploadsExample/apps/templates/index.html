@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlaskUploads</title>
+</head>
+<body>
+<h1>Flask-Uploads扩展插件上传文件</h1>
+<hr style="border:dashed"/>
+<form role="form" method="post" enctype="multipart/form-data">
+    <input type="file" name="image_upload">
+    <input type="submit" value="提交表单">
+</form>
+{{msg}}
+{% if file_url %}
+    <img src="{{file_url}}" title="第一种方法：url_for" width="100px">
+{% else %}
+    <h3> 第一种方法：url_for：请选择图片上传!!</h3>
+{% endif %}
+
+{% if file_url2 %}
+    <img src="{{file_url2}}" title="第二种方法：send_from_directory" width="100px">
+{% else %}
+    <h3> 第二种方法：send_from_directory：请选择图片上传!!</h3>
+{% endif %}
+{% if file_url3 %}
+    <img src="{{file_url3}}" title="第三种方法：UploadSet.url(file_path)" width="100px">
+{% else %}
+    <h3> 第三种方法：UploadSet.url(file_path)：请选择图片上传!!</h3>
+{% endif %}
+
+</body>
+</html>

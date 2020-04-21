@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="95ace6c3-153c-43c6-8fef-06a45ac2e032" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../flask004/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask001/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask001/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask002/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask002/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask003/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask003/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask003/apps/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/../flask003/apps/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask003/apps/static/uploads/flask003/16_f07e73.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask004/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask004/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask004/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask004/apps/__init__.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Flask Main" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1aqKCQsoCnDRpdg9IKfCh9BJk5j" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\zhang\PythonProject\FlaskProject\flask005" />
+    </key>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="95ace6c3-153c-43c6-8fef-06a45ac2e032" name="Default Changelist" comment="" />
+      <created>1587457555552</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587457555552</updated>
+      <workItem from="1587457557136" duration="571000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="577" y="350" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587457593873">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="577" y="350" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587457593873" />
+    <state x="691" y="474" key="FileChooserDialogImpl" timestamp="1587458023533">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="691" y="474" key="FileChooserDialogImpl/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587458023533" />
+    <state x="479" y="277" key="SettingsEditor" timestamp="1587457585117">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="479" y="277" key="SettingsEditor/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587457585117" />
+  </component>
+</project>
