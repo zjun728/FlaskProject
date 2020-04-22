@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="562f65a1-42f1-4f09-b15e-e43e2c02693b" name="Default Changelist" comment="" />
+    <list default="true" id="562f65a1-42f1-4f09-b15e-e43e2c02693b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../FlaskUploadsExample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FlaskUploadsExample/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/apps/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/static/uploads/flask001/7_1df2e5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/static/uploads/张大宝/9_d2d9c7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +38,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FlaskUploadsExample" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -96,6 +103,8 @@
       <workItem from="1587472731852" duration="13000" />
       <workItem from="1587472753495" duration="75000" />
       <workItem from="1587554409025" duration="4000" />
+      <workItem from="1587554790623" duration="28000" />
+      <workItem from="1587554916717" duration="162000" />
     </task>
     <servers />
   </component>
@@ -108,30 +117,30 @@
     </state>
     <state x="357" y="241" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587453888275" />
     <state x="357" y="241" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587472809324" />
-    <state x="587" y="294" key="FileChooserDialogImpl" timestamp="1587472824936">
+    <state x="587" y="294" key="FileChooserDialogImpl" timestamp="1587554801629">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="587" y="294" key="FileChooserDialogImpl/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587457525416" />
+    <state x="587" y="294" key="FileChooserDialogImpl/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587554801629" />
     <state x="587" y="294" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587472824936" />
-    <state width="914" height="261" key="GridCell.Tab.0.bottom" timestamp="1587472828496">
+    <state width="1340" height="268" key="GridCell.Tab.0.bottom" timestamp="1587555078765">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="268" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587457809238" />
+    <state width="1340" height="268" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587555078765" />
     <state width="914" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587472828496" />
-    <state width="914" height="261" key="GridCell.Tab.0.center" timestamp="1587472828496">
+    <state width="1340" height="268" key="GridCell.Tab.0.center" timestamp="1587555078764">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="268" key="GridCell.Tab.0.center/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587457809238" />
+    <state width="1340" height="268" key="GridCell.Tab.0.center/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587555078764" />
     <state width="914" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587472828496" />
-    <state width="914" height="261" key="GridCell.Tab.0.left" timestamp="1587472828496">
+    <state width="1340" height="268" key="GridCell.Tab.0.left" timestamp="1587555078764">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="268" key="GridCell.Tab.0.left/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587457809238" />
+    <state width="1340" height="268" key="GridCell.Tab.0.left/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587555078764" />
     <state width="914" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587472828496" />
-    <state width="914" height="261" key="GridCell.Tab.0.right" timestamp="1587472828496">
+    <state width="1340" height="268" key="GridCell.Tab.0.right" timestamp="1587555078764">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="268" key="GridCell.Tab.0.right/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587457809238" />
+    <state width="1340" height="268" key="GridCell.Tab.0.right/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587555078764" />
     <state width="914" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587472828496" />
     <state x="308" y="181" key="SettingsEditor" timestamp="1587472783134">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -140,6 +149,6 @@
     <state x="308" y="181" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587472783134" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/flask004$runserver.coverage" NAME="runserver Coverage Results" MODIFIED="1587472813712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flask004$runserver.coverage" NAME="runserver Coverage Results" MODIFIED="1587554996711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
