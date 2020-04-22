@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95ace6c3-153c-43c6-8fef-06a45ac2e032" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../flask004/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask001/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask001/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask002/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask002/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask003/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask003/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask003/apps/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/../flask003/apps/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask003/apps/static/uploads/flask003/16_f07e73.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FlaskUploadsExample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FlaskUploadsExample/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../flask004/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask004/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask004/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask004/apps/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/apps/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/static/uploads/张大宝/9_d2d9c7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/templates/user_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/templates/user_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,13 +39,37 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../flask004" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\zhang\PythonProject\FlaskProject\flask005" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="runserver" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="flask005" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/runserver.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -69,6 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1587457555552</updated>
       <workItem from="1587457557136" duration="571000" />
+      <workItem from="1587562304999" duration="5890000" />
     </task>
     <servers />
   </component>
@@ -76,17 +102,39 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="577" y="350" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587457593873">
+    <state x="577" y="349" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587562327863">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="577" y="350" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587457593873" />
-    <state x="691" y="474" key="FileChooserDialogImpl" timestamp="1587458023533">
+    <state x="577" y="349" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587562327863" />
+    <state x="691" y="474" key="FileChooserDialogImpl" timestamp="1587565220439">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="474" key="FileChooserDialogImpl/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587458023533" />
-    <state x="479" y="277" key="SettingsEditor" timestamp="1587457585117">
+    <state x="691" y="474" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587565220439" />
+    <state width="914" height="261" key="GridCell.Tab.0.bottom" timestamp="1587568443400">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587568443400" />
+    <state width="914" height="261" key="GridCell.Tab.0.center" timestamp="1587568443400">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587568443400" />
+    <state width="914" height="261" key="GridCell.Tab.0.left" timestamp="1587568443400">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587568443400" />
+    <state width="914" height="261" key="GridCell.Tab.0.right" timestamp="1587568443400">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587568443400" />
+    <state x="479" y="277" key="SettingsEditor" timestamp="1587562367157">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="479" y="277" key="SettingsEditor/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587457585117" />
+    <state x="479" y="277" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587562367157" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/flask005$runserver.coverage" NAME="runserver Coverage Results" MODIFIED="1587567460372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

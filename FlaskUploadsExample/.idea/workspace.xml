@@ -4,6 +4,13 @@
     <list default="true" id="94ddb94d-ef52-458d-b2c8-acc3a992c7da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../flask004/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask004/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/apps/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/apps/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/apps/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/apps/static/uploads/张大宝/9_d2d9c7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/apps/templates/user_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/templates/user_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/apps/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +37,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../flask004" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../flask005" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -87,6 +94,8 @@
       <workItem from="1587458034460" duration="2837000" />
       <workItem from="1587472827491" duration="3076000" />
       <workItem from="1587554806175" duration="112000" />
+      <workItem from="1587561931874" duration="1596000" />
+      <workItem from="1587563765278" duration="1442000" />
     </task>
     <servers />
   </component>
@@ -99,11 +108,11 @@
     </state>
     <state x="377" y="322" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587458159866" />
     <state x="377" y="322" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587472870399" />
-    <state x="279" y="437" key="FileChooserDialogImpl" timestamp="1587554913432">
+    <state x="1271" y="239" key="FileChooserDialogImpl" timestamp="1587562302681">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="279" y="437" key="FileChooserDialogImpl/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587554913432" />
-    <state x="279" y="437" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587473228738" />
+    <state x="1271" y="239" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587562302681" />
     <state width="1439" height="233" key="GridCell.Tab.0.bottom" timestamp="1587554917877">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

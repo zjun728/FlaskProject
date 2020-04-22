@@ -1,22 +1,25 @@
 import shutil
-
-from werkzeug.utils import secure_filename
-
-from apps import app
-from apps.utils import create_folder, secure_filename_with_uuid, check_files_extension, ALLOWED_IMAGEEXTENSIONS
-
-from flask import url_for, render_template, request, redirect, flash, make_response
-
-from apps.forms import RegistForm, LoginForm, PwdForm, InfoForm
-from apps.model import User
-from flask import session
-import sqlite3
 import os
 from functools import wraps
 
+from flask import session
+from flask_uploads import UploadSet, IMAGES, configure_uploads, UploadNotAllowed
+from flask import url_for, render_template, request, redirect, flash, make_response
+
+from apps import app
+from apps.utils import create_folder, secure_filename_with_uuid
+from apps.forms import RegistForm, LoginForm, PwdForm, InfoForm
+from apps.model import User
 # 登录装饰器检查登录状态（当未登陆账号时访问个人中心等界面直接跳转到登陆界面）
 from apps.sqlite3_manage import query_users_from_db, query_user_by_name, instert_user_to_db, update_user_by_name, \
     delete_user_by_name
+
+# 第二步：产生UploadSet类对象的实例，用来管理上传集合
+# Upload Sets 管理上传集合
+photosSet = UploadSet(name='photos', extensions=IMAGES)  # 'photos'必须是 app.config['UPLOADED_PHOTOS_DEST']中的 PHOTOS 的小写格式
+
+# 第三步：配置FlaskUpLoad和app,绑定 app 与UploadSet对象实例
+configure_uploads(app, photosSet)
 
 
 def user_login_req(f):
@@ -133,13 +136,19 @@ def user_regist():  # 注册
         # 插入一条数据
         instert_user_to_db(user)
         # 保存用户头像文件
-        user_folder = os.path.join(app.config["UPLOADS_FOLDER"], user.name)
-        create_folder(user_folder)  # 创建用户文件夹
-        filerstorage.save(os.path.join(user_folder, user.face))
-        flash("注册成功！", category="ok")
-        # username作为查询参数带到url中去
-        # 重定向页面 生成url 执行 user_login 函数 跳转到登录界面
-        return redirect(url_for("user_login", username=user.name))
+        # user_folder = os.path.join(app.config["UPLOADS_FOLDER"], user.name)
+        # create_folder(user_folder)  # 创建用户文件夹
+        # filerstorage.save(os.path.join(user_folder, user.face))
+        try:
+            photosSet.save(storage=filerstorage, folder=user.name, name=user.face)
+
+            flash("注册成功！", category="ok")
+            # username作为查询参数带到url中去
+            # 重定向页面 生成url 执行 user_login 函数 跳转到登录界面
+            return redirect(url_for("user_login", username=user.name))
+        except UploadNotAllowed:
+            flash("头像文件格式错误！", category="err")
+            return render_template("user_regist.html", form=form)
     return render_template("user_regist.html", form=form)
 
 
@@ -154,7 +163,9 @@ def user_center():  # 个人中心
 def user_detail():  # 个人信息
     user = query_user_by_name(session.get("user_name"))
     uploads_folder = app.config["UPLOADS_RELATIVE"]
-    return render_template("user_detail.html", uploads_folder=uploads_folder, user=user)
+    face_url = photosSet.url(user.name + "/" + user.face)
+    print(face_url)
+    return render_template("user_detail.html", user=user, face_url=face_url)
 
 
 @app.route('/pwd/', methods=['GET', 'POST'])
@@ -199,7 +210,7 @@ def user_info():  # 修改个人信息
             user.age = request.form["user_age"]
             user.birthday = request.form["user_birthday"]
             filestorage = request.files["user_face"]  # 获取头像文件
-            #filestorage = form.user_face.data  # 获取头像文件
+            # filestorage = form.user_face.data  # 获取头像文件
             if filestorage.filename != "":
                 # # 检查用户上传的头像文件名是否符合要求
                 # if not check_files_extension([form.user_face.data.filename], ALLOWED_IMAGEEXTENSIONS):

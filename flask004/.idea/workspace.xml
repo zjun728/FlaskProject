@@ -4,10 +4,12 @@
     <list default="true" id="562f65a1-42f1-4f09-b15e-e43e2c02693b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../FlaskUploadsExample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FlaskUploadsExample/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/apps/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/static/uploads/flask001/7_1df2e5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/static/uploads/张大宝/9_d2d9c7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/apps/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/apps/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/apps/static/uploads/张大宝/9_d2d9c7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/apps/templates/user_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/templates/user_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask005/apps/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +107,8 @@
       <workItem from="1587554409025" duration="4000" />
       <workItem from="1587554790623" duration="28000" />
       <workItem from="1587554916717" duration="162000" />
+      <workItem from="1587565223250" duration="14000" />
+      <workItem from="1587565266139" duration="43000" />
     </task>
     <servers />
   </component>

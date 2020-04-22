@@ -21,6 +21,12 @@ app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024  # 限制上传文件大小
 
 create_folder(app.config["UPLOADS_FOLDER"])  # 创建uploads
 
+
+# 第一步：配置上传文件的保存地址 app.config['UPLOADED_PHOTOS_DEST'] 中PHOTOS可自定义，
+# 但其小写形式需跟 第二步中（views.py 中） UploadSet('photos', IMAGES)  第一个参数保持一致
+app.config['UPLOADED_PHOTOS_DEST'] = app.config["UPLOADS_FOLDER"]
+
+
 # app的工作目录
 # print("__init__当前目录os：", os.getcwd())
 # print("__init__当前目录 __file__：", __file__)
