@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, IntegerField, DateField, FileField, SubmitField
+from wtforms import StringField, PasswordField, IntegerField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, NumberRange
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 
@@ -170,8 +170,7 @@ class InfoForm(FlaskForm):
 
     user_face = FileField(
         label="用户头像：",
-        validators=[FileRequired(message="用户头像不能为空！"),
-                    FileAllowed(["jpg", "jpeg", "png"], "只允许图像格式为：%s" % str(["jpg", "jpeg", "png"]))],
+        validators=[FileAllowed(["jpg", "jpeg", "png"], "只允许图像格式为：%s" % str(["jpg", "jpeg", "png"]))],
         render_kw={"id": "user_face",
                    "calss": "form-control",
                    "placeholder": "选择头像"

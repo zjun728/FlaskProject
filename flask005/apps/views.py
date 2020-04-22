@@ -123,8 +123,8 @@ def user_regist():  # 注册
         user.email = form.user_email.data
         # user.face = request.form["user_face"]
         # user.face = form.user_face.data
-        filerstorage = form.user_face.data
-        # filerstorage = request.files["user_face"]  # 获取头像文件
+        # filerstorage = form.user_face.data
+        filerstorage = request.files["user_face"]  # 获取头像文件
         user.face = secure_filename_with_uuid(
             filerstorage.filename)  # secure_filename 文件名安全性检测，如果文件名有特殊字符，会将特殊字符转义，没有就返回原文件名
         # print(user.face)
@@ -198,8 +198,8 @@ def user_info():  # 修改个人信息
             user.email = request.form["user_email"]
             user.age = request.form["user_age"]
             user.birthday = request.form["user_birthday"]
-            #filestorage = request.files["user_face"]  # 获取头像文件
-            filestorage = form.user_face.data  # 获取头像文件
+            filestorage = request.files["user_face"]  # 获取头像文件
+            #filestorage = form.user_face.data  # 获取头像文件
             if filestorage.filename != "":
                 # # 检查用户上传的头像文件名是否符合要求
                 # if not check_files_extension([form.user_face.data.filename], ALLOWED_IMAGEEXTENSIONS):

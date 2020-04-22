@@ -27,7 +27,8 @@ def index():
             # 第四步：使用UploadSet 的save方法保存文件
             # (self, storage, folder=None, name=None):
             # 保存到uploads的根目录   返回的是当前文件的名字  the file will be saved and its name (including the folder) will be returned.
-            fname = photosSet.save(fs)  # photosSet.save保存的 文件名fname 会做安全性检查，过滤掉特殊字符 fname可能不是原来的fs.filename 这个文件名了
+            fname = photosSet.save(fs,
+                                   name=fs.filename)  # photosSet.save保存的 文件名fname 会做安全性检查，过滤掉特殊字符 fname可能不是原来的fs.filename 这个文件名了
             print("文件名字：", fname)
 
             # 浏览器访问的资源地址
@@ -35,10 +36,11 @@ def index():
             # file_url = url_for("static",filename="uploads/" + fs.filename)  # static文件夹下的 uploads 文件夹下的 文件名为fs.filename 的文件
             file_url = url_for("static", filename="uploads/" + fname)
             # file_url2 = url_for("uploaded_file",fs.filename)
-            file_url2 = url_for("uploaded_file", filename=fname)   # 通过uploaded_file 路由视图函数获取url
+            file_url2 = url_for("uploaded_file", filename=fname)  # 通过uploaded_file 路由视图函数获取url
 
-            # 第五步：使用UploadSet 的url方法获得文件的url
+            # 第五步：使用UploadSet 的url方法获得文件的url   photosSet.url给浏览器提供urlphotosSet.path给服务器提供存储路径
             file_url3 = photosSet.url(fname)
+            # print(photosSet.url(fname), photosSet.path(fname))
             print("第一种方式", file_url)
             print("第二种方式", file_url2)
             print("第三种方式", file_url3)
@@ -70,22 +72,22 @@ def index2():
     if request.method == "POST":
         folder = request.form['image_folder']
         fs = request.files['image_file']
-        print(fs.filename != "")
         if fs.filename != "":
             try:
                 # fname = photosSet.save(storage=fs, folder=folder)   # photosSet.save会做安全性检查，过滤掉特殊字符 fname可能不是原来的fs.filename
                 # fname = photosSet.save(storage=fs, name=folder + "/" + fs.filename)  # 这样不会更改原文件名字
                 fname = photosSet.save(storage=fs, folder=folder, name=fs.filename)  # 强制使用原文件名 会保留原文件名字
-                print(fname)
+                print(fname)  # my/8.jpg
             except UploadNotAllowed:
                 flash(message="上传文件的类型不被允许！", category='err')
                 return render_template('index2.html')
             else:
-                # fpath=photosSet.path(filename=fname)
-                # fpath = photosSet.path(filename='3.jpg', folder=folder)
-
+                fpath1 = photosSet.path(filename=fname)  # photosSet.save如果已传入folder信息 则获取path不需要再传入folder  fname已包含folder路径
+                fpath2 = photosSet.path(filename='3.jpg', folder=folder)
+                print(fpath1, fpath2)
                 # os.remove(fpath)
                 furl = photosSet.url(fname)
+                print(furl)
                 flash(message="上传文件成功！", category='ok')
                 return render_template('index2.html', file_url=furl)
     return render_template('index2.html')

@@ -20,7 +20,8 @@ app.config['ABS_UPLOAD_FOLDER'] = os.path.join(STATIC_DIR, app.config['UPLOAD_FO
 # print(app.config['ABS_UPLOAD_FOLDER'])    # :\Pyproject\FlaskServer\apps\static\uploads
 
 
-# 第一步：配置上传文件的保存地址
+# 第一步：配置上传文件的保存地址 app.config['UPLOADED_PHOTOS_DEST'] 中PHOTOS可自定义，
+# 但其小写形式需跟 第二步中（views.py 中） UploadSet('photos', IMAGES)  第一个参数保持一致
 app.config['UPLOADED_PHOTOS_DEST'] = app.config['ABS_UPLOAD_FOLDER']
 
 creat_folder(app.config['ABS_UPLOAD_FOLDER'])
