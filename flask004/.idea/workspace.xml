@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="562f65a1-42f1-4f09-b15e-e43e2c02693b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../FlaskUploadsExample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FlaskUploadsExample/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask005/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask005/apps/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask005/apps/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask005/apps/static/uploads/张大宝/9_d2d9c7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask005/apps/templates/user_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/templates/user_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flask005/apps/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask005/apps/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="562f65a1-42f1-4f09-b15e-e43e2c02693b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +31,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../flask005" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -109,6 +100,7 @@
       <workItem from="1587554916717" duration="162000" />
       <workItem from="1587565223250" duration="14000" />
       <workItem from="1587565266139" duration="43000" />
+      <workItem from="1587608870556" duration="528000" />
     </task>
     <servers />
   </component>
@@ -121,10 +113,10 @@
     </state>
     <state x="357" y="241" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587453888275" />
     <state x="357" y="241" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587472809324" />
-    <state x="587" y="294" key="FileChooserDialogImpl" timestamp="1587554801629">
+    <state x="587" y="294" key="FileChooserDialogImpl" timestamp="1587609394981">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="587" y="294" key="FileChooserDialogImpl/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587554801629" />
+    <state x="587" y="294" key="FileChooserDialogImpl/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587609394981" />
     <state x="587" y="294" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587472824936" />
     <state width="1340" height="268" key="GridCell.Tab.0.bottom" timestamp="1587555078765">
       <screen x="0" y="0" width="1920" height="1040" />

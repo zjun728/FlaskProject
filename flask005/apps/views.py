@@ -217,12 +217,18 @@ def user_info():  # 修改个人信息
                 #     flash("头像文件格式错误！", category="err")
                 #     return redirect(url_for("user_info"))
                 # 若果上传了新的头像文件，首先删除旧的，再保存新的
-                user_folder = os.path.join(app.config["UPLOADS_FOLDER"], old_name)
+                # user_folder = os.path.join(app.config["UPLOADS_FOLDER"], old_name)
                 # 删除就旧的头像
-                os.remove(path=os.path.join(user_folder, user.face))
+                # os.remove(path=os.path.join(user_folder, user.face))
+                # 获取旧头像的存储路径
+                userface_path = photosSet.path(filename=user.face, folder=old_name)
+                # 删除就旧的头像
+                os.remove(userface_path)
+
                 # 保存新的
                 user.face = secure_filename_with_uuid(filestorage.filename)
-                filestorage.save(os.path.join(user_folder, user.face))
+                # filestorage.save(os.path.join(user_folder, user.face))
+                photosSet.save(storage=filestorage, folder=old_name, name=user.face)
                 pass
             # 判断是否修改了用户名：如果修改了则同时修改用户上传资源文件夹
             if old_name != new_name:
@@ -247,7 +253,7 @@ def user_del():  # 注销个人账号
         current_login_name = session.get("user_name")
         # 删除用户的上传的文件资源
         del_path = os.path.join(app.config["UPLOADS_FOLDER"], current_login_name)
-        shutil.rmtree(del_path, ignore_errors=True)  # shutil文件拷贝，文件删除的第三方库
+        shutil.rmtree(del_path, ignore_errors=True)  # shutil 文件拷贝、文件删除 的第三方库
         # 删除用户数据库数据
         delete_user_by_name(current_login_name)
         return redirect(url_for("logout"))  # 执行退出操作函数
