@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95ace6c3-153c-43c6-8fef-06a45ac2e032" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../flask004/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask004/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/apps/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/static/uploads/flask001/7_1df2e5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/static/uploads/flask002/16_64af73.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +88,7 @@
       <workItem from="1587457557136" duration="571000" />
       <workItem from="1587562304999" duration="5890000" />
       <workItem from="1587609398060" duration="10578000" />
+      <workItem from="1587692515296" duration="8101000" />
     </task>
     <servers />
   </component>
@@ -105,10 +101,10 @@
     </state>
     <state x="577" y="350" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587457593873" />
     <state x="577" y="349" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587562327863" />
-    <state x="691" y="474" key="FileChooserDialogImpl" timestamp="1587565220439">
+    <state x="691" y="474" key="FileChooserDialogImpl" timestamp="1587712958330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="691" y="474" key="FileChooserDialogImpl/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587458023533" />
+    <state x="691" y="474" key="FileChooserDialogImpl/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587712958330" />
     <state x="691" y="474" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587565220439" />
     <state width="1340" height="268" key="GridCell.Tab.0.bottom" timestamp="1587637239521">
       <screen x="0" y="0" width="1920" height="1040" />
