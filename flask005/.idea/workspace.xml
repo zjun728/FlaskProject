@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95ace6c3-153c-43c6-8fef-06a45ac2e032" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FlaskUploadsExample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FlaskUploadsExample/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +31,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FlaskSqlAlchemyExamples" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -89,6 +89,7 @@
       <workItem from="1587562304999" duration="5890000" />
       <workItem from="1587609398060" duration="10578000" />
       <workItem from="1587692515296" duration="8101000" />
+      <workItem from="1587736181127" duration="16000" />
     </task>
     <servers />
   </component>
@@ -101,11 +102,11 @@
     </state>
     <state x="577" y="350" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587457593873" />
     <state x="577" y="349" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587562327863" />
-    <state x="691" y="474" key="FileChooserDialogImpl" timestamp="1587712958330">
+    <state x="691" y="474" key="FileChooserDialogImpl" timestamp="1587736193066">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="474" key="FileChooserDialogImpl/0.0.1920.1040/-1600.0.1600.900@0.0.1920.1040" timestamp="1587712958330" />
-    <state x="691" y="474" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587565220439" />
+    <state x="691" y="474" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587736193066" />
     <state width="1340" height="268" key="GridCell.Tab.0.bottom" timestamp="1587637239521">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
