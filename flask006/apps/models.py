@@ -2,6 +2,8 @@ import uuid as uuid
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from apps import db
+# 密码解密
+from werkzeug.security import check_password_hash
 
 
 class User(db.Model):
@@ -16,13 +18,14 @@ class User(db.Model):
     jianjie = db.Column(db.TEXT)
     uuid = db.Column(db.String(255), unique=True, nullable=False)
     addtime = db.Column(db.DATETIME, index=True, default=datetime.now)
+
     # addtime = db.Column(db.DATETIME, default=datetime.now)
 
     def __repr__(self):
         return '<User %r>' % (self.name)
 
     def check_pwd(self, pwd):
-        return self.pwd == pwd
+        return check_password_hash(self.pwd, pwd)  # 传入的pwd与解密后的self.pwd相等返回true否则返回false
 
 
 if __name__ == '__main__':
@@ -30,4 +33,3 @@ if __name__ == '__main__':
     # 需要将__init__.py脚本中import apps.views 包注释掉，防止循环引用
     db.drop_all(bind=None)
     db.create_all()
-

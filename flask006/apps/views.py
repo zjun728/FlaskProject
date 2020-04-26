@@ -6,7 +6,8 @@ from functools import wraps
 from flask import session
 from flask_uploads import UploadSet, IMAGES, configure_uploads, UploadNotAllowed
 from flask import url_for, render_template, request, redirect, flash, make_response
-
+# 密码加密
+from werkzeug.security import generate_password_hash
 from apps import app
 from apps.utils import create_folder, secure_filename_with_uuid
 from apps.forms import RegistForm, LoginForm, PwdForm, InfoForm
@@ -20,6 +21,7 @@ photosSet = UploadSet(name='photos', extensions=IMAGES)  # 'photos'必须是 app
 configure_uploads(app, photosSet)
 
 
+# 登录装饰器，检查登录状态
 def user_login_req(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -51,7 +53,7 @@ def index():  # 首页
 #    return render_template("index.html")
 
 
-@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/user/login/', methods=['GET', 'POST'])
 def user_login():  # 登录
 
     form = LoginForm()
@@ -83,7 +85,7 @@ def user_login():  # 登录
     return render_template("user_login.html", form=form)
 
 
-@app.route('/logout')
+@app.route('/user/logout')
 @user_login_req
 def logout():  # 退出登录
     # remove the username from the session if it's there
@@ -92,7 +94,7 @@ def logout():  # 退出登录
     return redirect(url_for('index'))
 
 
-@app.route('/regist/', methods=['GET', 'POST'])
+@app.route('/user/regist/', methods=['GET', 'POST'])
 def user_regist():  # 注册
     form = RegistForm()
     if form.validate_on_submit():  # 检查提交方式是否为post 验证forms.py定义的validators 验证是否通过
@@ -102,11 +104,21 @@ def user_regist():  # 注册
         #     return render_template("user_regist.html", form=form)
         # 查看用户是否存在
         user_name = form.user_name.data
-        user_one = User.query.filter_by(name=user_name).first()
-        if user_one:
+        query_user_by_name = User.query.filter_by(name=user_name).first()
+        if query_user_by_name:
             # 返回注册界面，重新注册
             flash("用户名已存在！", category="err")  # Flashes a message to the next request 闪现一条消息到下一次消息请求
+            return render_template("user_regist.html", form=form)
 
+        query_user_by_phone = User.query.filter_by(phone=form.user_phone.data).first()
+        if query_user_by_phone:
+            # 返回注册界面，重新注册
+            flash("手机号已被注册！", category="err")  # Flashes a message to the next request 闪现一条消息到下一次消息请求
+            return render_template("user_regist.html", form=form)
+        query_user_by_email = User.query.filter_by(email=form.user_email.data).first()
+        if query_user_by_email:
+            # 返回注册界面，重新注册
+            flash("用户邮箱已被注册注册！", category="err")  # Flashes a message to the next request 闪现一条消息到下一次消息请求
             return render_template("user_regist.html", form=form)
 
         # print("form", form.user_name.data)
@@ -117,7 +129,7 @@ def user_regist():  # 注册
         # user.name = request.form["user_name"]
         user.name = form.user_name.data
         # user.pwd = request.form["user_pwd"]
-        user.pwd = form.user_pwd.data
+        user.pwd = generate_password_hash(form.user_pwd.data)
         # user.age = request.form["user_age"]
         user.phone = form.user_phone.data
         # user.birthday = request.form["user_birthday"]
@@ -154,13 +166,13 @@ def user_regist():  # 注册
     return render_template("user_regist.html", form=form)
 
 
-@app.route('/center/', methods=['GET', 'POST'])
+@app.route('/user/center/', methods=['GET', 'POST'])
 @user_login_req
 def user_center():  # 个人中心
     return render_template("user_center.html")
 
 
-@app.route('/detail/', methods=['GET', 'POST'])
+@app.route('/user/detail/', methods=['GET', 'POST'])
 @user_login_req
 def user_detail():  # 个人信息
     user = User.query.get_or_404(int(session.get('user_id')))  # 如果查找不到就抛出404错误
@@ -169,7 +181,7 @@ def user_detail():  # 个人信息
     return render_template("user_detail.html", user=user, face_url=face_url)
 
 
-@app.route('/pwd/', methods=['GET', 'POST'])
+@app.route('/user/pwd/', methods=['GET', 'POST'])
 @user_login_req
 def user_pwd():  # 修改个人密码
     form = PwdForm()
@@ -178,7 +190,7 @@ def user_pwd():  # 修改个人密码
         new_pwd = request.form["new_pwd"]
         user = User.query.get_or_404(int(session.get('user_id')))  # 如果查找不到就抛出404错误
         if user.check_pwd(old_pwd):
-            user.pwd = new_pwd
+            user.pwd = generate_password_hash(new_pwd)
             # 更新原数据
             db.session.add(user)  # 当插入数据时，检测到插入的数据主键（id） 已存在 则更新原数据
             db.session.commit()
@@ -193,7 +205,7 @@ def user_pwd():  # 修改个人密码
     return render_template("user_pwd.html", form=form)
 
 
-@app.route('/info/', methods=['GET', 'POST'])
+@app.route('/user/info/', methods=['GET', 'POST'])
 @user_login_req
 def user_info():  # 修改个人信息
     user = User.query.get_or_404(int(session.get('user_id')))  # 如果查找不到就抛出404错误
@@ -205,10 +217,27 @@ def user_info():  # 修改个人信息
         form.user_jianjie.data = user.jianjie
     if form.validate_on_submit():
         current_login_name = session.get("user_name")
+
         old_name = user.name
         new_name = request.form["user_name"]
-        query_user = User.query.filter_by(name=new_name).first()
-        if query_user == None or current_login_name == query_user.name:  # 如果数据库没有这个用户名或者当前登录的用户名和更改的用户名一样（本人操作），都可以更新个人信息
+        query_user_by_name = User.query.filter_by(name=new_name).first()
+        query_user_by_phone = User.query.filter_by(phone=request.form["user_phone"]).first()
+        query_user_by_email = User.query.filter_by(email=request.form["user_email"]).first()
+        print()
+
+        if query_user_by_phone != None and user.phone != query_user_by_phone.phone:
+            flash(message="手机号已被注册！", category="err")
+            print(1111)
+            return render_template("user_info.html", user=user, form=form)
+        elif query_user_by_email != None and user.email != query_user_by_email.email:
+            flash(message="邮箱已被注册！", category="err")
+            print(222)
+            return render_template("user_info.html", user=user, form=form)
+        elif query_user_by_name != None and current_login_name != query_user_by_name.name:  # 如果数据库没有这个用户名或者当前登录的用户名和更改的用户名一样（本人操作），都可以更新个人信息
+            flash(message="用户名已存在！", category="err")
+            print(333)
+            return render_template("user_info.html", user=user, form=form)
+        else:
             user.name = request.form["user_name"]
             user.email = request.form["user_email"]
             user.phone = request.form["user_phone"]
@@ -247,13 +276,10 @@ def user_info():  # 修改个人信息
             session["user_name"] = user.name
             session["user_id"] = user.id
             return redirect(url_for("user_detail"))
-        else:
-            flash(message="用户名已存在！", category="err")
-
     return render_template("user_info.html", user=user, form=form)
 
 
-@app.route('/del/', methods=['GET', 'POST'])
+@app.route('/user/del/', methods=['GET', 'POST'])
 @user_login_req
 def user_del():  # 注销个人账号
     if request.method == "POST":

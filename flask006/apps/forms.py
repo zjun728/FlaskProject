@@ -1,7 +1,7 @@
 from flask_uploads import IMAGES
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, IntegerField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired, Length, Email, NumberRange
+from wtforms.validators import DataRequired, Length, Email, NumberRange, Regexp   # Regexp正则表达式验证器
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 
 
@@ -39,7 +39,8 @@ class RegistForm(FlaskForm):
     user_phone = StringField(
 
         label="用户手机：",
-        validators=[DataRequired(message="用户手机不能为空！")],
+        validators=[DataRequired(message="用户手机不能为空！"),
+                    Regexp("1[1,2,3,5,6,7,8,9]\d{9}",message="手机号格式不正确！")],
         render_kw={"id": "user_phone",
                    "calss": "form-control",
                    "placeholder": "输入用户手机"

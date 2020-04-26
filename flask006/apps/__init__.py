@@ -10,7 +10,7 @@ import mysql.connector
 app = Flask(__name__)
 app.debug = True
 app.config["SECRET_KEY"] = "who i am? do you know?"
-
+app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024  # 限制上传文件大小
 # ./flask003/apps
 APPS_DIR = os.path.dirname(__file__)  # os.path.dirname(__file__)为 当前文件__init__.py文件所在路径
 # ./flask003/apps/static
@@ -29,7 +29,6 @@ db = SQLAlchemy(app)
 app.config["UPLOADS_RELATIVE"] = "uploads"
 # 上传文件存储路径路径
 app.config["UPLOADS_FOLDER"] = os.path.join(STATIC_DIR, app.config["UPLOADS_RELATIVE"])
-app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024  # 限制上传文件大小
 
 create_folder(app.config["UPLOADS_FOLDER"])  # 创建uploads
 
