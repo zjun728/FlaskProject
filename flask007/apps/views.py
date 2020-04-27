@@ -11,6 +11,7 @@ from werkzeug.security import generate_password_hash
 from apps import app
 from apps.utils import create_folder, secure_filename_with_uuid
 from apps.forms import RegistForm, LoginForm, PwdForm, InfoForm
+from apps.forms import AlbumInfoForm
 from apps.models import User, db
 
 # 第二步：产生UploadSet类对象的实例，用来管理上传集合
@@ -300,9 +301,19 @@ def album_index():  # 相册首页
     return render_template("album_index.html")
 
 
-@app.route('/album/create/')
+@app.route('/album/create/', methods=['GET', 'POST'])
+@user_login_req
 def album_create():  # 相册首页
-    return render_template("album_create.html")
+    form = AlbumInfoForm()
+    if form.validate_on_submit():
+        return redirect(url_for("album_upload"))
+    return render_template("album_create.html", form=form)
+
+
+@app.route('/album/upload/', methods=['GET', 'POST'])
+@user_login_req
+def album_upload():  # 相册首页
+    return render_template("album_upload.html")
 
 
 @app.route('/album/browse/')

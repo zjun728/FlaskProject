@@ -24,7 +24,7 @@ STATIC_DIR = os.path.join(APPS_DIR, "static/")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:123456@localhost/flasker'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # 创建数据库对象
-db = SQLAlchemy(app)
+db = SQLAlchemy(app,use_native_unicode="utf8")
 
 app.config["UPLOADS_RELATIVE"] = "uploads"
 # 上传文件存储路径路径
@@ -53,4 +53,4 @@ app.config['UPLOADED_PHOTOS_DEST'] = app.config["UPLOADS_FOLDER"]
 #     app.run()
 
 
-import apps.views
+# import apps.views

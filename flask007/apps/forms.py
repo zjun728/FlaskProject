@@ -1,7 +1,7 @@
 from flask_uploads import IMAGES
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, IntegerField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired, Length, Email, NumberRange, Regexp  # Regexp正则表达式验证器
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField
+from wtforms.validators import DataRequired, Length, Email, Regexp  # Regexp正则表达式验证器
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 
 
@@ -73,7 +73,6 @@ class RegistForm(FlaskForm):
                    "value": "注册"
                    }
     )
-
 
 
 class LoginForm(FlaskForm):
@@ -185,5 +184,56 @@ class InfoForm(FlaskForm):
         label="提交表单",
         render_kw={"class": "btn btn-success",
                    "value": "修改"
+                   }
+    )
+
+
+class AlbumInfoForm(FlaskForm):
+    album_title = StringField(
+        label="相册标题",
+        validators=[DataRequired(message="相册标题不能为空！"),
+                    Length(min=3, max=15, message="相册标题长度3-15个字符")],
+        render_kw={"id": "album_title",
+                   "class": "form-control",
+                   "rows": "3",
+                   "placeholder": "请输入相册标题"
+                   }
+    )
+
+    album_desc = TextAreaField(
+        label="相册描述",
+        validators=[DataRequired(message="相册描述不能为空！"),
+                    Length(min=10, max=200, message="相册描述长度10-200个字符")],
+        render_kw={"id": "album_desc",
+                   "class": "form-control",
+                   "placeholder": "相册描述"
+                   }
+    )
+
+    album_privacy = SelectField(
+        label="相册浏览权限",
+        validators=[DataRequired(message="相册浏览权限不能为空！")],
+        coerce=str,
+        choices=[("private", "仅自己"), ("protect_1", "粉丝可见"),
+                 ("protect_2", "收藏者可见"), ("public", "所有人可见")],
+        render_kw={"id": "album_privacy",
+                   "class": "form-control",
+                   }
+    )
+
+    album_tag = SelectField(
+        label="相册类别标签",
+        validators=[DataRequired(message="相册类别标签不能为空！")],
+        coerce=str,
+        choices=[("1", "萌宠"), ("2", "风景"),
+                 ("3", "动漫"), ("4", "太空")],
+        render_kw={"id": "album_tag",
+                   "class": "form-control",
+                   }
+    )
+    submit = SubmitField(
+        label="创建相册信息",
+        render_kw={"class": "btn btn-success",
+                   "value": "创建相册信息"
                    }
     )

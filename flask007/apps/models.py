@@ -88,5 +88,17 @@ class Photo(db.Model):
 if __name__ == '__main__':
     # 当我们在数据库中写入新的类(表)或者某一表中添加或删除某一属性后需要更新数据库时，
     # 需要将__init__.py脚本中import apps.views 包注释掉，防止循环引用
-    db.drop_all(bind=None)
-    db.create_all()
+    flag = 1
+    if flag == 0:
+        # db.drop_all(bind=None)
+        db.create_all()
+    if flag == 1:
+        tag0 = AlbumTag(name="风景")
+        tag1 = AlbumTag(name="动漫")
+        tag2 = AlbumTag(name="星空")
+        tag3 = AlbumTag(name="萌宠")
+        db.session.add(tag0)
+        db.session.add(tag1)
+        db.session.add(tag2)
+        db.session.add(tag3)
+        db.session.commit()
