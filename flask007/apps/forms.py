@@ -11,7 +11,7 @@ class RegistForm(FlaskForm):
         validators=[DataRequired(message="用户名不能为空！"),
                     Length(min=3, max=15, message="用户名长度3-15个字符")],
         render_kw={"id": "user_name",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "输入用户名"
                    }
     )
@@ -21,7 +21,7 @@ class RegistForm(FlaskForm):
         validators=[DataRequired(message="用户密码不能为空！"),
                     Length(min=3, max=5, message="用户密码长度3-5个字符")],
         render_kw={"id": "user_pwd",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "输入密码"
                    }
     )
@@ -31,7 +31,7 @@ class RegistForm(FlaskForm):
         validators=[DataRequired(message="用户邮箱不能为空！"),
                     Email(message="邮箱格式错误！")],
         render_kw={"id": "user_email",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "输入用户邮箱"
                    }
     )
@@ -42,7 +42,7 @@ class RegistForm(FlaskForm):
         validators=[DataRequired(message="用户手机不能为空！"),
                     Regexp("1[3,5,6,7,8,9]\d{9}", message="手机号格式不正确！")],
         render_kw={"id": "user_phone",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "输入用户手机"
                    }
     )
@@ -52,7 +52,7 @@ class RegistForm(FlaskForm):
         validators=[FileRequired(message="用户头像不能为空！"),
                     FileAllowed(IMAGES, "只允许图像格式为：%s" % str(IMAGES))],
         render_kw={"id": "user_face",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "选择头像"
                    }
     )
@@ -62,14 +62,14 @@ class RegistForm(FlaskForm):
         label="用户简介",
         validators=[],
         render_kw={"id": "user_jianjie",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "用户简介"
                    }
     )
 
     submit = SubmitField(
         label="提交表单",
-        render_kw={"class": "btn-success",
+        render_kw={"class": "btn btn-success",
                    "value": "注册"
                    }
     )
@@ -81,7 +81,7 @@ class LoginForm(FlaskForm):
         label="用户名：",
         validators=[DataRequired(message="用户名不能为空！")],
         render_kw={"id": "user_name",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "输入用户名"
                    }
     )
@@ -90,13 +90,13 @@ class LoginForm(FlaskForm):
         label="用户密码：",
         validators=[DataRequired(message="用户密码不能为空！")],
         render_kw={"id": "user_pwd",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "输入密码"
                    }
     )
     submit = SubmitField(
         label="提交表单",
-        render_kw={"class": "btn-success",
+        render_kw={"class": "btn btn-success",
                    "value": "登录"
                    }
     )
@@ -107,7 +107,7 @@ class PwdForm(FlaskForm):
         label="用户旧密码：",
         validators=[DataRequired(message="用户密码不能为空！")],
         render_kw={"id": "old_pwd",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "输入密码"
                    }
     )
@@ -117,14 +117,14 @@ class PwdForm(FlaskForm):
         validators=[DataRequired(message="用户密码不能为空！"),
                     Length(min=3, max=5, message="用户密码长度3-5个字符")],
         render_kw={"id": "new_pwd",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "输入密码"
                    }
     )
 
     submit = SubmitField(
         label="提交表单",
-        render_kw={"class": "btn-success",
+        render_kw={"class": "btn btn-success",
                    "value": "修改"
                    }
     )
@@ -136,7 +136,7 @@ class InfoForm(FlaskForm):
         validators=[DataRequired(message="用户名不能为空！"),
                     Length(min=3, max=15, message="用户名长度3-15个字符")],
         render_kw={"id": "user_name",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "输入用户名"
                    }
     )
@@ -146,7 +146,7 @@ class InfoForm(FlaskForm):
         validators=[DataRequired(message="用户邮箱不能为空！"),
                     Email(message="邮箱格式错误！")],
         render_kw={"id": "user_email",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "输入用户邮箱"
                    }
     )
@@ -157,7 +157,7 @@ class InfoForm(FlaskForm):
         validators=[DataRequired(message="用户手机不能为空！"),
                     Regexp("1[3,5,6,7,8,9]\d{9}", message="手机号格式不正确！")],
         render_kw={"id": "user_phone",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "输入用户手机"
                    }
     )
@@ -167,7 +167,7 @@ class InfoForm(FlaskForm):
         label="用户简介",
         validators=[],
         render_kw={"id": "user_jianjie",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "用户简介"
                    }
     )
@@ -176,14 +176,14 @@ class InfoForm(FlaskForm):
         label="用户头像：",
         validators=[FileAllowed(IMAGES, "只允许图像格式为：%s" % str(IMAGES))],
         render_kw={"id": "user_face",
-                   "calss": "form-control",
+                   "class": "form-control",
                    "placeholder": "选择头像"
                    }
     )
 
     submit = SubmitField(
         label="提交表单",
-        render_kw={"class": "btn-success",
+        render_kw={"class": "btn btn-success",
                    "value": "修改"
                    }
     )

@@ -1,0 +1,61 @@
+<!--引入layout.html模板，并重写 % block content 中内容 -->
+{% extends 'layout.html' %}
+<!--重写 block content中内容 -->
+{% block content %}
+
+    <h2 class="page-header">创建相册/填写相册信息</h2>
+
+    <div>
+
+        <form role="form" method="post" class="col-md-4 col-md-offset-2">
+            <div class="form-group">
+                <label for="album_title">相册标题</label>
+                <input type="text" id="album_title" name="album_title"
+                       class="form-control" placeholder="请输入相册标题">
+
+            </div>
+
+             <div class="form-group">
+                <label for="album_desc">相册描述</label>
+                <textarea class="form-control" id="album_desc" name="album_desc"
+                          rows="3" placeholder="输入相册简介"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>相册浏览权限</label>
+                <select class="form-control">
+                    <option value="private">仅自己</option>
+                    <option value="protect_1">粉丝可见</option>
+                    <option value="protect_2">收藏者可见</option>
+                    <option value="public">所有人可见</option>
+                </select>
+            </div>
+
+             <div class="form-group">
+                <label>相册类别标签</label>
+                <select class="form-control">
+                    <option value="1">萌宠</option>
+                    <option value="2">风景</option>
+                    <option value="3">人物</option>
+                    <option value="4">动漫</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="form-control btn btn-primary" value="创建相册信息">
+            </div>
+
+        </form>
+
+
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block js_code %}
+
+{% endblock %}
+
