@@ -6,7 +6,13 @@
     <h2 class="page-header">创建相册/填写相册信息</h2>
 
     <div>
+    {% for message in get_flashed_messages(with_categories=False, category_filter=("err")) %}
+        <h3 style="color: red"> {{ message }}</h3>
+    {% endfor %}
 
+    {% for message in get_flashed_messages(with_categories=False, category_filter=("ok")) %}
+        <h3 style="color: green"> {{ message }}</h3>
+    {% endfor %}
         <form role="form" method="post" class="col-md-4 col-md-offset-2">
             <div class="form-group">
                 {{ form.album_title.label }}

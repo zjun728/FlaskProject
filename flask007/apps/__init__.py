@@ -53,4 +53,4 @@ app.config['UPLOADED_PHOTOS_DEST'] = app.config["UPLOADS_FOLDER"]
 #     app.run()
 
 
-# import apps.views
+import apps.views

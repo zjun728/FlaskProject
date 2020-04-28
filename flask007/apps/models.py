@@ -46,7 +46,7 @@ class AlbumTag(db.Model):
 class Album(db.Model):
     __tablename__ = "album"
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), unique=True, nullable=False)  # 标题
+    title = db.Column(db.String(80), nullable=False)  # 标题
     desc = db.Column(db.TEXT)  # 描述
     photonum = db.Column(db.Integer, default=0)  # 相册图片数量
     privacy = db.Column(db.String(20), default="public")  # 是否私有private私有 protect_1粉丝好友可见 protect_2收藏者可见 public公开
@@ -90,15 +90,17 @@ if __name__ == '__main__':
     # 需要将__init__.py脚本中import apps.views 包注释掉，防止循环引用
     flag = 1
     if flag == 0:
-        # db.drop_all(bind=None)
+        db.drop_all(bind=None)
         db.create_all()
     if flag == 1:
         tag0 = AlbumTag(name="风景")
         tag1 = AlbumTag(name="动漫")
         tag2 = AlbumTag(name="星空")
         tag3 = AlbumTag(name="萌宠")
+        tag4 = AlbumTag(name="人物")
         db.session.add(tag0)
         db.session.add(tag1)
         db.session.add(tag2)
         db.session.add(tag3)
+        db.session.add(tag4)
         db.session.commit()

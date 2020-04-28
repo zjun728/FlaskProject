@@ -8,11 +8,11 @@ from flask_uploads import UploadSet, IMAGES, configure_uploads, UploadNotAllowed
 from flask import url_for, render_template, request, redirect, flash, make_response
 # 密码加密
 from werkzeug.security import generate_password_hash
-from apps import app
+from apps import app, db
 from apps.utils import create_folder, secure_filename_with_uuid
 from apps.forms import RegistForm, LoginForm, PwdForm, InfoForm
-from apps.forms import AlbumInfoForm
-from apps.models import User, db
+from apps.forms import AlbumInfoForm, AlbumUploadForm
+from apps.models import User, AlbumTag, Album
 
 # 第二步：产生UploadSet类对象的实例，用来管理上传集合
 # Upload Sets 管理上传集合
@@ -306,6 +306,32 @@ def album_index():  # 相册首页
 def album_create():  # 相册首页
     form = AlbumInfoForm()
     if form.validate_on_submit():
+        album_title = form.album_title.data
+        # exsited_count = Album.query.filter_by(title=album_title).count()
+        # print(exsited_count)
+        # if exsited_count > 0:   # 判断创建的相册标题是否已经存在
+        #     flash(message="相册标题已经存在，请重新输入标题！！", category="err")
+        #     return render_template("album_create.html", form=form)
+
+        album_desc = form.album_desc.data
+        album_privacy = form.album_privacy.data
+        album_tag = form.album_tag.data
+        album_uuid = str(uuid.uuid4().hex)[0:10]
+
+        exsited = True
+        while exsited:  # 确保uuid唯一性
+            exsited_count = Album.query.filter_by(uuid=album_uuid).count()
+            if exsited_count > 0:  # 判断创建的相册uuid是否已经存在
+                print("已存在，重新生成uuid")
+                album_uuid = str(uuid.uuid4().hex)[0:10]
+            else:
+                exsited = False
+
+        album = Album(title=album_title, desc=album_desc, privacy=album_privacy,
+                      tag_id=album_tag, uuid=album_uuid, user_id=int(session["user_id"]))
+
+        db.session.add(album)
+        db.session.commit()
         return redirect(url_for("album_upload"))
     return render_template("album_create.html", form=form)
 
@@ -313,7 +339,15 @@ def album_create():  # 相册首页
 @app.route('/album/upload/', methods=['GET', 'POST'])
 @user_login_req
 def album_upload():  # 相册首页
-    return render_template("album_upload.html")
+    form = AlbumUploadForm()
+
+    albums = Album.query.filter_by(user_id=session["user_id"]).all()  # 获取全部相册标签
+    form.album_title.choices = [(item.id, item.title) for item in albums]  # 获取到数据库中存储的全部相册标签然后动态填写
+    if request.method == "POST":
+        fs = request.files["album_upload"]
+        print(fs)
+        return redirect(url_for("album_upload"))
+    return render_template("album_upload.html", form=form)
 
 
 @app.route('/album/browse/')
