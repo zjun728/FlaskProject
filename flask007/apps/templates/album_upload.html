@@ -6,8 +6,13 @@
     <h2 class="page-header">创建相册/上传相册文件</h2>
 
     <div class="col-md-12">
+        {% for message in get_flashed_messages(with_categories=False, category_filter=("err")) %}
+            <h4 style="color: red"> {{ message }}</h4>
+        {% endfor %}
+        {% for message in get_flashed_messages(with_categories=False, category_filter=("ok")) %}
+            <h4 style="color: green"> {{ message }}</h4>
+        {% endfor %}
         <form role="form" method="post" enctype="multipart/form-data">
-
             <div class="form-group col-md-3">
 
                 {{ form.album_title }}
@@ -17,7 +22,7 @@
             </div>
 
             <div class="form-group col-md-3">
-               {{ form.album_upload }}
+                {{ form.album_upload }}
                 {% for err in form.album_upload.errors %}
                     <p style="color: red">{{ err }} </p>
                 {% endfor %}

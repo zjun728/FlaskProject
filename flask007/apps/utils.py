@@ -38,7 +38,7 @@ def secure_filename_with_uuid(filename):
     return filename
 
 
-ALLOWED_IMAGEEXTENSIONS = set(["png", "jpg", "jpeg", "gif", "bmp"])
+ALLOWED_IMAGEEXTENSIONS = set(["png", "jpg", "jpeg"])
 ALLOWED_VIDEO_EXTENSIONS = set(["mp4", "avi"])
 ALLOWED_AUDIO_EXTENSIONS = set(["mp3", "m4a"])
 
@@ -51,3 +51,16 @@ def check_files_extension(filenameslist, allowed_extensions):
     if not check_state:
         return False
     return True
+
+
+# 检查上传控件上传的(多个文件的后缀名是否符合指定的要求
+def check_filestorages_extension(filestoragelist, allowed_extensions):
+    ext_valid_fs = []  # 正确文件的列表
+    for fs in filestoragelist:
+        #  rsplit() 方法从右侧开始将字符串拆分为列表。 rsplit(".", 1) 从右往左分割，分割一次
+        check_state = "." in fs.filename and \
+                      fs.filename.rsplit(".", 1)[1].lower() in allowed_extensions
+    # 将符合文件加入到列表，返回出去
+        if check_state:
+            ext_valid_fs.append(fs)
+    return ext_valid_fs

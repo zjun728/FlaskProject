@@ -247,7 +247,7 @@ class AlbumInfoForm(FlaskForm):
 
 class AlbumUploadForm(FlaskForm):
     album_title = SelectField(
-        validators=[DataRequired(message="相册名称不能为空！")],
+        # validators=[DataRequired(message="相册名称不能为空！")],
         coerce=int,
         # choices=[(item.id, item.title) for item in albums],  # 获取到数据库中存储的全部相册标签然后动态填写
         render_kw={"id": "album_title", "class": "form-control"}
@@ -256,8 +256,8 @@ class AlbumUploadForm(FlaskForm):
     album_upload = FileField(
         # validators=[FileRequired(message="请选择一张或多张图片上传！"),
         #             FileAllowed(IMAGES, "只允许图像格式为：%s" % str(IMAGES))],
-        # render_kw={"id": "album_upload", "class": "form-control", "multiple": "multiple"
-        #            }
+        render_kw={"id": "album_upload", "class": "form-control", "multiple": "multiple"
+                   }
     )
 
     submit = SubmitField(

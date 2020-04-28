@@ -9,7 +9,7 @@ from flask import url_for, render_template, request, redirect, flash, make_respo
 # 密码加密
 from werkzeug.security import generate_password_hash
 from apps import app, db
-from apps.utils import create_folder, secure_filename_with_uuid
+from apps.utils import secure_filename_with_uuid, check_filestorages_extension, ALLOWED_IMAGEEXTENSIONS
 from apps.forms import RegistForm, LoginForm, PwdForm, InfoForm
 from apps.forms import AlbumInfoForm, AlbumUploadForm
 from apps.models import User, AlbumTag, Album
@@ -340,12 +340,22 @@ def album_create():  # 相册首页
 @user_login_req
 def album_upload():  # 相册首页
     form = AlbumUploadForm()
-
     albums = Album.query.filter_by(user_id=session["user_id"]).all()  # 获取全部相册标签
     form.album_title.choices = [(item.id, item.title) for item in albums]  # 获取到数据库中存储的全部相册标签然后动态填写
     if request.method == "POST":
-        fs = request.files["album_upload"]
-        print(fs)
+        fses = request.files.getlist("album_upload")  # 获取上传的多个文件
+        # 检查文件扩展名，将合格的文件过滤出来
+        valid_fses = check_filestorages_extension(fses, allowed_extensions=ALLOWED_IMAGEEXTENSIONS)
+        if len(valid_fses) < 1:
+            flash(message="只允许上传文件类型：" + str(ALLOWED_IMAGEEXTENSIONS), category="err")
+            return redirect(url_for("album_upload"))
+        else:
+            # 开始遍历保存每一个合格文件
+            for fs in valid_fses:
+               fname= photosSet.save(fs, folder=session.get("user_name"), name=fs.filename.lower())
+               print(fname)
+            flash(message="成功上传 " + str(len(valid_fses)) + " 张图片！！", category="ok")
+            return redirect(url_for("album_upload"))
         return redirect(url_for("album_upload"))
     return render_template("album_upload.html", form=form)
 
