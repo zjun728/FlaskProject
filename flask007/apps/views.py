@@ -13,7 +13,7 @@ from apps.utils import secure_filename_with_uuid, check_filestorages_extension, 
     create_thumbnail, create_show
 from apps.forms import RegistForm, LoginForm, PwdForm, InfoForm
 from apps.forms import AlbumInfoForm, AlbumUploadForm
-from apps.models import User, AlbumTag, Album
+from apps.models import User, AlbumTag, Album, Photo
 
 # 第二步：产生UploadSet类对象的实例，用来管理上传集合
 # Upload Sets 管理上传集合
@@ -378,6 +378,14 @@ def album_upload():  # 相册首页
                 files_url.append(furl)
                 # 创建并保存大图
                 name_show = create_show(path=ts_path, filename=name_origin, base_width=800)
+
+                # 将产生的Photo对象保存到数据库中去
+                photo = Photo(origname=name_origin, showname=name_show, thumbname=name_thumb,
+                              album_id=form.album_title.data)
+                # 更新数据库
+                db.session.add(photo)
+                db.session.commit()
+
                 furl = photosSet.url(folder + "/" + name_thumb)
                 # files_url.append(furl)
 
