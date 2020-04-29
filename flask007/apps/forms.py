@@ -198,7 +198,7 @@ class AlbumInfoForm(FlaskForm):
         label="相册名称",
         validators=[DataRequired(message="相册名称不能为空！"),
                     Length(min=3, max=15, message="相册名称长度3-15个字符")],
-        render_kw={"id": "album_title",
+        render_kw={"id": "album_id",
                    "class": "form-control",
                    "rows": "3",
                    "placeholder": "请输入相册名称"
@@ -249,7 +249,6 @@ class AlbumUploadForm(FlaskForm):
     album_title = SelectField(
         # validators=[DataRequired(message="相册名称不能为空！")],
         coerce=int,
-        # choices=[(item.id, item.title) for item in albums],  # 获取到数据库中存储的全部相册标签然后动态填写
         render_kw={"id": "album_title", "class": "form-control"}
     )
 

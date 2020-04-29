@@ -78,9 +78,9 @@ class AlbumFavor(db.Model):
 class Photo(db.Model):
     __tablename__ = "photo"
     id = db.Column(db.Integer, primary_key=True)
-    fname = db.Column(db.String(255), unique=True, nullable=False)  # 原图片名
-    fname_s = db.Column(db.String(255), unique=True, nullable=False)  # 展示图片名
-    fname_t = db.Column(db.String(255), unique=True, nullable=False)  # 缩略图片名
+    origname = db.Column(db.String(255), unique=True, nullable=False)  # 原图片名
+    showname = db.Column(db.String(255), unique=True, nullable=False)  # 展示图片名
+    thumbname = db.Column(db.String(255), unique=True, nullable=False)  # 缩略图片名
     album_id = db.Column(db.Integer, db.ForeignKey("album.id"))  # 定义外键 album_id 来源于 album表中id 通过album_id获取到当前相册
     addtime = db.Column(db.DATETIME, index=True, default=datetime.now)  # 收藏时间
 

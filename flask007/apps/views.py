@@ -9,7 +9,8 @@ from flask import url_for, render_template, request, redirect, flash, make_respo
 # 密码加密
 from werkzeug.security import generate_password_hash
 from apps import app, db
-from apps.utils import secure_filename_with_uuid, check_filestorages_extension, ALLOWED_IMAGEEXTENSIONS
+from apps.utils import secure_filename_with_uuid, check_filestorages_extension, ALLOWED_IMAGEEXTENSIONS, \
+    create_thumbnail, create_show
 from apps.forms import RegistForm, LoginForm, PwdForm, InfoForm
 from apps.forms import AlbumInfoForm, AlbumUploadForm
 from apps.models import User, AlbumTag, Album
@@ -52,7 +53,6 @@ def index():  # 首页
 # def index():
 #     print("首页")
 #    return render_template("index.html")
-
 
 @app.route('/user/login/', methods=['GET', 'POST'])
 def user_login():  # 登录
@@ -307,6 +307,13 @@ def album_create():  # 相册首页
     form = AlbumInfoForm()
     if form.validate_on_submit():
         album_title = form.album_title.data
+        # 判断当前用户是否已经创建该标题的相册   如果相册属于当前用户，且刚创建的相册名称是否已经存在当前登录用户的相册中
+        existedCount = Album.query.filter(Album.user_id == session["user_id"], Album.title == album_title).count()
+        if existedCount > 0:
+            # 相册已经创建过
+            flash(message="当前相册已存在，请重新命名相册或更新已有相册！", category="err")
+            return render_template("album_create.html", form=form)
+
         # exsited_count = Album.query.filter_by(title=album_title).count()
         # print(exsited_count)
         # if exsited_count > 0:   # 判断创建的相册标题是否已经存在
@@ -341,6 +348,7 @@ def album_create():  # 相册首页
 def album_upload():  # 相册首页
     form = AlbumUploadForm()
     albums = Album.query.filter_by(user_id=session["user_id"]).all()  # 获取全部相册标签
+    # 动态构造form表单数据： 相册的id作为form.album_title.data即 form.album_title.data为当前相册的id
     form.album_title.choices = [(item.id, item.title) for item in albums]  # 获取到数据库中存储的全部相册标签然后动态填写
     if request.method == "POST":
         fses = request.files.getlist("album_upload")  # 获取上传的多个文件
@@ -350,13 +358,42 @@ def album_upload():  # 相册首页
             flash(message="只允许上传文件类型：" + str(ALLOWED_IMAGEEXTENSIONS), category="err")
             return redirect(url_for("album_upload"))
         else:
+            # 获取当前相册的名称
+            files_url = []
+            album_title = ""
+            for id, title in form.album_title.choices:
+                if id == form.album_title.data:
+                    album_title = title
             # 开始遍历保存每一个合格文件
             for fs in valid_fses:
-               fname= photosSet.save(fs, folder=session.get("user_name"), name=fs.filename.lower())
-               print(fname)
-            flash(message="成功上传 " + str(len(valid_fses)) + " 张图片！！", category="ok")
-            return redirect(url_for("album_upload"))
-        return redirect(url_for("album_upload"))
+                name_origin = secure_filename_with_uuid(fs.filename)
+                folder = session.get("user_name") + "/" + album_title
+                fname = photosSet.save(fs, folder=folder, name=name_origin)
+                ts_path = photosSet.config.destination + "/" + folder
+                # 创建并保存缩略图  photosSet.config.destination=app.config['UPLOADED_PHOTOS_DEST']   绝对路径 uploads文件夹
+                name_thumb = create_thumbnail(path=ts_path, filename=name_origin, base_width=300)
+                # 获取保存缩略图文件的url
+                # furl = photosSet.url(fname)  #原图url
+                furl = photosSet.url(folder + "/" + name_thumb)
+                files_url.append(furl)
+                # 创建并保存大图
+                name_show = create_show(path=ts_path, filename=name_origin, base_width=800)
+                furl = photosSet.url(folder + "/" + name_thumb)
+                # files_url.append(furl)
+
+            # 当前上传图片的相册
+            print("当前相册id: ", form.album_title.data)
+            # 获取当前相册 form构造的时候 相册的id作为form.album_title.data即 form.album_title.data为当前相册的id
+            album = Album.query.filter_by(id=form.album_title.data).first()
+            album.photonum += len(valid_fses)
+            # 更新数据库
+            db.session.add(album)
+            db.session.commit()
+            message = "成功上传 " + str(len(valid_fses)) + " 张图片！！" + "当前相册共有 " + str(album.photonum) + " 张图片！！"
+            flash(message=message, category="ok")
+
+            return render_template("album_upload.html", form=form, files_url=files_url)
+
     return render_template("album_upload.html", form=form)
 
 

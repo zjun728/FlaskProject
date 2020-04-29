@@ -9,9 +9,7 @@
         {% for message in get_flashed_messages(with_categories=False, category_filter=("err")) %}
             <h4 style="color: red"> {{ message }}</h4>
         {% endfor %}
-        {% for message in get_flashed_messages(with_categories=False, category_filter=("ok")) %}
-            <h4 style="color: green"> {{ message }}</h4>
-        {% endfor %}
+
         <form role="form" method="post" enctype="multipart/form-data">
             <div class="form-group col-md-3">
 
@@ -36,8 +34,18 @@
         </form>
     </div>
 
-{% endblock %}
+    <div class="col-md-12">
+        {% for message in get_flashed_messages(with_categories=False, category_filter=("ok")) %}
+            <h4 style="color: green"> {{ message }}</h4>
+        {% endfor %}
+        {% if files_url %}
+            {% for furl in files_url %}
+                <img src="{{ furl }}" style="width: 150px">
+            {% endfor %}
+        {% endif %}
+    </div>
 
+{% endblock %}
 
 {% block js_code %}
 

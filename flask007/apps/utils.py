@@ -60,7 +60,42 @@ def check_filestorages_extension(filestoragelist, allowed_extensions):
         #  rsplit() 方法从右侧开始将字符串拆分为列表。 rsplit(".", 1) 从右往左分割，分割一次
         check_state = "." in fs.filename and \
                       fs.filename.rsplit(".", 1)[1].lower() in allowed_extensions
-    # 将符合文件加入到列表，返回出去
+        # 将符合文件加入到列表，返回出去
         if check_state:
             ext_valid_fs.append(fs)
     return ext_valid_fs
+
+
+# pip3 install pillow
+import PIL
+from PIL import Image
+
+
+# 创建缩略图
+def create_thumbnail(path, filename, base_width=300):
+    imgname, ext = os.path.splitext(filename)
+    newfilename = imgname + "_thumb_" + ext  # 缩略图的文件名
+    img = Image.open(os.path.join(path, filename))  # 根据指定的路径打开图像文件
+    if img.size[0] > base_width:
+        # 如果图片宽度小于base_with,不做处理，直接保存
+        # 如果图片宽度大于base_width 将其缩放到basewith,并保持图像原来的宽高比
+        w_perecent = (base_width / float(img.size[0]))
+        h_size = int((float(img.size[1]) * float(w_perecent)))
+        img = img.resize((base_width, h_size), PIL.Image.ANTIALIAS)  # PIL.Image.ANTIALIAS 防锯齿
+    img.save(os.path.join(path, newfilename))
+    return newfilename
+
+
+# 创建大图
+def create_show(path, filename, base_width=800):
+    imgname, ext = os.path.splitext(filename)
+    newfilename = imgname + "_show_" + ext  # 展示图的文件名
+    img = Image.open(os.path.join(path, filename))  # 根据指定的路径打开图像文件
+    if img.size[0] < base_width:
+        # 如果图片宽度大于于base_with,不做处理，直接保存
+        # 如果图片宽度小于base_width 将其缩放到basewith,并保持图像原来的宽高比
+        w_perecent = (base_width / float(img.size[0]))
+        h_size = int((float(img.size[1]) * float(w_perecent)))
+        img = img.resize((base_width, h_size), PIL.Image.ANTIALIAS)  # PIL.Image.ANTIALIAS 防锯齿
+    img.save(os.path.join(path, newfilename))
+    return newfilename
