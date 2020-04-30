@@ -1,6 +1,7 @@
 import shutil
 import os
 import uuid
+from random import randint
 from functools import wraps
 
 from flask import session
@@ -374,6 +375,7 @@ def album_upload():  # 相册首页
             for fs in valid_fses:
                 name_origin = secure_filename_with_uuid(fs.filename)
                 folder = session.get("user_name") + "/" + album_title
+                # 保存原图
                 fname = photosSet.save(fs, folder=folder, name=name_origin)
                 ts_path = photosSet.config.destination + "/" + folder
                 # 创建并保存缩略图  photosSet.config.destination=app.config['UPLOADED_PHOTOS_DEST']   绝对路径 uploads文件夹
@@ -418,7 +420,17 @@ def album_browse():  # 相册首页
 
 @app.route('/album/list/')
 def album_list():  # 相册首页
-    return render_template("album_list.html")
+    albumtags = AlbumTag.query.all()
+    albums = Album.query.all()
+    for album in albums:
+        coverimage = album.photos[randint(0, len(album.photos) - 1)].thumbname
+        # print(album.id, coverimage)
+        folder = album.user.name + "/" + album.title  # 通过album.user.name  album声明的外键user.id来查找到user本身
+        # print("--------", folder)
+        # 动态给album添加一个封面属性
+        album.coverimageurl = photosSet.url(filename=folder + "/" + coverimage)  # filename是相对于uploads文件夹的路径
+
+    return render_template("album_list.html", albumtags=albumtags, albums=albums)
 
 
 # 在该界面一旦请求的url找不到， 触发404错误后，app会找到定义的改路由，返回定义的内容 render_template('page_not_found.html'), 404

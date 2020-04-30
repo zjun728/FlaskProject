@@ -1,0 +1,54 @@
+<!--引入layout.html模板，并重写 % block content 中内容 -->
+{% extends 'layout.html' %}
+<!--重写 block content中内容 -->
+{% block content %}
+
+    <div class="page-header">
+
+        <a style="display: inline-block;font-size: x-large;margin: 5px 5px">所有分类</a>
+
+        {% for item in albumtags %}
+            <a style="display: inline-block;font-size: large;margin: 5px 5px">{{ item.name }}</a>
+        {% endfor %}
+    </div>
+
+    <div class="container">
+
+        {% for item in albums %}
+            <div class="col-md-3">
+                <div class="media-card">
+                    <div class="panel panel-body" style="display: block;padding: 3px;">
+                        <div class="card-title">
+                        <span style="font-size: large;font-weight: bold;color: #101010">
+                            {{ item.title }}
+                        </span>
+                            <span style="font-size: small;font-weight: 600;color: #101010">
+                            {{ item.user.name }}
+                        </span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-image">
+                                <a href="album_browse.html" target="_blank">
+                                    <img src="{{ item.coverimageurl }}"
+                                         width="250px" height="150px">
+                                </a>
+                            </div>
+                            <div class="sard-stutas" style="font-size: large;font-weight: 500;color: #2e6da4">
+                                <span>浏览量{{ item.clicknum }}</span> <span>收藏量{{ item.favornum }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    </div>
+
+
+{% endblock %}
+
+{% block js_code %}
+
+{% endblock %}
+

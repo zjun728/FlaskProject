@@ -1,0 +1,98 @@
+<!--引入layout.html模板，并重写 % block content 中内容 -->
+{% extends 'layout.html' %}
+<!--重写 block content中内容 -->
+<!--修改个人资料 -->
+{% block content %}
+
+    <!--当未登录时，直接访问个人中心url则跳转到登录界面
+    {% if "user_name" not in session %}
+    <script>
+    window.location="{{ url_for("user_login") }}"
+    </script>
+    {% endif %}
+-->
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron" style="padding: 5px 5%">
+        <h2>{{ session.get("user_name") }}的个人中心</h2>
+    </div>
+    <div>
+
+        {% include "user_menu.html" %}
+
+        <div class="col-md-10">
+
+            <div class="jumbotron" style="padding-top: 10px">
+                <h2>修改个人资料</h2>
+                <hr style="border: dashed">
+
+                {% for message in get_flashed_messages(with_categories=False, category_filter=("err")) %}
+                    <h3 style="color: red"> {{ message }}</h3>
+                {% endfor %}
+
+                {% for message in get_flashed_messages(with_categories=False, category_filter=("ok")) %}
+                    <h3 style="color: green"> {{ message }}</h3>
+                {% endfor %}
+
+                <form role="form" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        {{ form.user_name.label }}
+                        {{ form.user_name(value=user.name) }}
+                        {% for err in form.user_name.errors %}
+                            <p style="color: red">{{ err }} </p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.user_email.label }}
+                        {{ form.user_email(value=user.email) }}
+                        {% for err in form.user_email.errors %}
+                            <p style="color: red">{{ err }} </p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.user_phone.label }}
+                        {{ form.user_phone(value=user.phone) }}
+                        {% for err in form.user_phone.errors %}
+                            <p style="color: red">{{ err }} </p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.user_jianjie.label }}
+                        {{ form.user_jianjie}}
+                        {% for err in form.user_jianjie.errors %}
+                            <p style="color: red">{{ err }} </p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.user_face.label }}
+                        {{ form.user_face(value=user.face) }}
+                        {% for err in form.user_face.errors %}
+                            <p style="color: red">{{ err }} </p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.csrf_token }}    <!--csrf表单保护-->
+                        {{ form.submit }}
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block js_code %}
+    <script>
+        $(document).ready(
+            function () {
+                $("#item-3").addClass("list-group-item-success")
+            }
+        );
+    </script>
+{% endblock %}
