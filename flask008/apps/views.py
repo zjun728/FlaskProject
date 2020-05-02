@@ -349,7 +349,9 @@ def album_create():  # 相册首页
 @user_login_req
 def album_upload():  # 相册首页
     form = AlbumUploadForm()
-    albums = Album.query.filter_by(user_id=session["user_id"]).all()  # 获取全部相册标签
+    # albums = Album.query.filter_by(user_id=session["user_id"]).all()  # 获取全部相册标签
+    albums = Album.query.filter_by(user_id=session["user_id"]).order_by(
+        Album.addtime.desc()).all()  # 获取全部相册标签
     # 动态构造form表单数据： 相册的id作为form.album_title.data即 form.album_title.data为当前相册的id
     form.album_title.choices = [(item.id, item.title) for item in albums]  # 获取到数据库中存储的全部相册标签然后动态填写
 
@@ -365,9 +367,11 @@ def album_upload():  # 相册首页
             flash(message="只允许上传文件类型：" + str(ALLOWED_IMAGEEXTENSIONS), category="err")
             return redirect(url_for("album_upload"))
         else:
-            # 获取当前相册的名称
+
             files_url = []
             album_title = ""
+            album_cover = ""
+            # 获取当前相册的名称
             for id, title in form.album_title.choices:
                 if id == form.album_title.data:
                     album_title = title
@@ -393,6 +397,10 @@ def album_upload():  # 相册首页
                 # 更新数据库
                 db.session.add(photo)
                 db.session.commit()
+                # 设置封面文件 设置第一个作为封面图像
+                # if album_cover == "":
+                #     album_cover = photo.thumbname
+                album_cover = photo.thumbname
 
                 furl = photosSet.url(folder + "/" + name_thumb)
                 # files_url.append(furl)
@@ -402,6 +410,7 @@ def album_upload():  # 相册首页
             # 获取当前相册 form构造的时候 相册的id作为form.album_title.data即 form.album_title.data为当前相册的id
             album = Album.query.filter_by(id=form.album_title.data).first()
             album.photonum += len(valid_fses)
+            album.cover = album_cover
             # 更新数据库
             db.session.add(album)
             db.session.commit()
@@ -418,17 +427,41 @@ def album_browse():  # 相册首页
     return render_template("album_browse.html")
 
 
-@app.route('/album/list/')
-def album_list():  # 相册首页
+@app.route('/album/list/<int:page>')
+def album_list(page=1):  # 相册首页
     albumtags = AlbumTag.query.all()
-    albums = Album.query.all()
-    for album in albums:
+
+    tagid = request.args.get("tag", "all")  # 如果get传过来的没有参数，则默认为all
+    if tagid == "all":  # 如果查找所有标签，则展示所有非私有相册
+        # albums = Album.query.filter(Album.privacy != "private").order_by(
+        #     Album.addtime.desc()).all()  # 只以某种条件查找数据
+
+        albums = Album.query.filter(Album.privacy != "private").order_by(
+            Album.addtime.desc()).paginate(page=page, per_page=12)  # 分页展示 page=当前第几页page  per_page 每页多少
+
+    else:  # 按照给定的标签查找
+        # albums = Album.query.filter(Album.privacy != "private", Album.tag_id == int(tagid)).order_by(
+        #     Album.addtime.desc()).all()  # 只以某种条件查找数据
+        albums = Album.query.filter(Album.privacy != "private", Album.tag_id == int(tagid)).order_by(
+            Album.addtime.desc()).paginate(page=page, per_page=12)  # 分页展示 page=当前第几页page  per_page 每页多少
+    # print(tagid)
+
+    # albums = Album.query.filter_by(privacy="public").all() # 通过XXX查找数据
+    # order_by()通过（）排序   order_by(Album.addtime.desc()) 通过时间降序排序（asc就是升序）
+    # albums = Album.query.filter(Album.privacy != "public", Album.privacy != "private").order_by(
+    #     Album.addtime.desc()).all()  # 只以某种条件查找数据
+    # print(albums.items)
+    for album in albums.items:
+        if album.photonum < 1:
+            continue
         coverimage = album.photos[randint(0, len(album.photos) - 1)].thumbname
         # print(album.id, coverimage)
         folder = album.user.name + "/" + album.title  # 通过album.user.name  album声明的外键user.id来查找到user本身
         # print("--------", folder)
-        # 动态给album添加一个封面属性
-        album.coverimageurl = photosSet.url(filename=folder + "/" + coverimage)  # filename是相对于uploads文件夹的路径
+        # 动态随机给album添加一个封面属性
+        # album.coverimageurl = photosSet.url(filename=folder + "/" + coverimage)  # filename是相对于uploads文件夹的路径
+        # 给一个固定封面
+        album.coverimageurl = photosSet.url(filename=folder + "/" + album.cover)  # filename是相对于uploads文件夹的路径
 
     return render_template("album_list.html", albumtags=albumtags, albums=albums)
 
