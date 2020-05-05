@@ -1,20 +1,21 @@
-import shutil
 import os
+import shutil
 import uuid
-from random import randint
 from functools import wraps
+from random import randint
 
 from flask import session
-from flask_uploads import UploadSet, IMAGES, configure_uploads, UploadNotAllowed
 from flask import url_for, render_template, request, redirect, flash, make_response
+from flask_uploads import UploadSet, IMAGES, configure_uploads, UploadNotAllowed
 # 密码加密
 from werkzeug.security import generate_password_hash
+
 from apps import app, db
+from apps.forms import AlbumInfoForm, AlbumUploadForm
+from apps.forms import RegistForm, LoginForm, PwdForm, InfoForm
+from apps.models import User, AlbumTag, Album, Photo, AlbumFavor
 from apps.utils import secure_filename_with_uuid, check_filestorages_extension, ALLOWED_IMAGEEXTENSIONS, \
     create_thumbnail, create_show
-from apps.forms import RegistForm, LoginForm, PwdForm, InfoForm
-from apps.forms import AlbumInfoForm, AlbumUploadForm
-from apps.models import User, AlbumTag, Album, Photo
 
 # 第二步：产生UploadSet类对象的实例，用来管理上传集合
 # Upload Sets 管理上传集合
@@ -24,7 +25,7 @@ photosSet = UploadSet(name='photos', extensions=IMAGES)  # 'photos'必须是 app
 configure_uploads(app, photosSet)
 
 
-# 登录装饰器，检查登录状态
+# 登录装饰器，检查登录状态， 未登录访问某视图函数时，跳转到 user_login 登录界面
 def user_login_req(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -422,12 +423,7 @@ def album_upload():  # 相册首页
     return render_template("album_upload.html", form=form)
 
 
-@app.route('/album/browse/')
-def album_browse():  # 相册首页
-    return render_template("album_browse.html")
-
-
-@app.route('/album/list/<int:page>')
+@app.route('/album/list/<int:page>', methods=['GET'])
 def album_list(page=1):  # 相册首页
     albumtags = AlbumTag.query.all()
 
@@ -454,16 +450,87 @@ def album_list(page=1):  # 相册首页
     for album in albums.items:
         if album.photonum < 1:
             continue
-        coverimage = album.photos[randint(0, len(album.photos) - 1)].thumbname
+
         # print(album.id, coverimage)
         folder = album.user.name + "/" + album.title  # 通过album.user.name  album声明的外键user.id来查找到user本身
         # print("--------", folder)
         # 动态随机给album添加一个封面属性
         # album.coverimageurl = photosSet.url(filename=folder + "/" + coverimage)  # filename是相对于uploads文件夹的路径
-        # 给一个固定封面
+        # 动态随机给album添加一个封面属性    # 给一个固定封面   直接使用 album.cover， 不进行二次赋值
+        album.cover = album.photos[randint(0, len(album.photos) - 1)].thumbname
+        # 构造一个封面图片路径参数（album没有该属性）
         album.coverimageurl = photosSet.url(filename=folder + "/" + album.cover)  # filename是相对于uploads文件夹的路径
 
     return render_template("album_list.html", albumtags=albumtags, albums=albums)
+
+
+@app.route('/album/browse<int:id>/', methods=['GET'])
+def album_browse(id):  # 相册首页
+    # 取出相册的基本信息 标题 相册图片，作者头像等
+    # album = Album.query.get(id=int(id))
+    album = Album.query.get_or_404(int(id))
+    # 取出作者头像的url
+    userface_url = photosSet.url(filename=album.user.name + "/" + album.user.face)
+    # 取出相册的所有图片
+
+    # 增加该相册的浏览量
+    album.clicknum += 1
+    # 更新数据库
+    db.session.add(album)
+    db.session.commit()
+
+    # 查询推荐相册 (通过相册标签推荐)
+    recommed_album = Album.query.filter(Album.id != album.id, Album.tag_id == album.tag_id).all()
+
+    # 只展示三个推荐列表
+    if len(recommed_album) > 3:
+        recommed_album = recommed_album[0:3]
+
+    # 给推荐相册随机加载一个封面图像
+    print(len(recommed_album))
+    for recommed in recommed_album:
+        if recommed.photonum < 1:
+            recommed_album.remove(recommed)
+            continue
+        folder = recommed.user.name + "/" + recommed.title  # 通过album.user.name  album声明的外键user.id来查找到user本身
+        # print("--------", folder)
+        # 动态随机给album添加一个封面属性
+        # album.coverimageurl = photosSet.url(filename=folder + "/" + coverimage)  # filename是相对于uploads文件夹的路径
+        # 动态随机给album添加一个封面属性    # 给一个固定封面   直接使用 album.cover， 不进行二次赋值
+        recommed.cover = recommed.photos[randint(0, len(recommed.photos) - 1)].thumbname
+        # 构造一个封面图片路径参数（album没有该属性）
+        recommed.coverimageurl = photosSet.url(filename=folder + "/" + recommed.cover)  # filename是相对于uploads文件夹的路径
+
+    for photo in album.photos:
+        photo_folder = album.user.name + "/" + album.title + "/"
+        # 动态的给图片构造一个url属性（数据库没有该属性）
+        photo.url = photosSet.url(filename=photo_folder + photo.showname)
+
+    return render_template("album_browse.html", album=album, userface_url=userface_url,
+                           recommed_album=recommed_album)
+
+
+# 处理收藏业务逻辑
+@app.route('/album/favor/', methods=['GET', 'POST'])
+def album_favor():
+    # aid=14+&uid=1 获取浏览器传的数据
+    aid = request.args.get("aid")  # 相册id
+    uid = request.args.get("uid")  # user_id
+    # 查询数据是否存在该收藏记录
+    # user_id=uid, album_id=aid 如果当前用户（user_id）已经收藏过了该 album_id的相册，则返回0 提示收藏失败（已收藏）
+    existedCount = AlbumFavor.query.filter_by(user_id=uid, album_id=aid).count()  # (过滤条件，当前用户uid只能收藏一次某个相册aid)
+    if existedCount > 0:
+        res = {"ok": 0}  # 创建一个返回的json对象 添加收藏失败，0 已经收藏过了
+    else:
+        res = {"ok": 1}  # 创建一个返回的json对象  1 添加收藏成功
+        # 创建收藏记录，并添加到收藏数据库
+        favor = AlbumFavor(user_id=uid, album_id=aid)
+        db.session.add(favor)
+        db.session.commit()
+    import json
+    # dumps 将json对象转换成字符串（序列化）
+
+    return json.dumps(res)  # 返回json字符串
 
 
 # 在该界面一旦请求的url找不到， 触发404错误后，app会找到定义的改路由，返回定义的内容 render_template('page_not_found.html'), 404
